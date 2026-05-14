@@ -1,0 +1,20 @@
+[project]
+name = "blackvector"
+version = "0.1.0"
+description = "Advanced computational rocket science platform"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy",
+    "scipy",
+    "pandas",
+    "matplotlib",
+    "plotly",
+    "fastapi",
+    "uvicorn",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.scripts]
+blackvector-sim = "blackvector.cli:main"
