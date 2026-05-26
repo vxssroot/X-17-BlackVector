@@ -7,15 +7,16 @@ Production-grade simulation, optimization, and mission planning for rocket syste
 ## Vision
 A research and engineering toolkit that bridges computational physics, systems engineering, and AI for next-generation aerospace vehicles.
 
-## Features
-- High-performance propulsion and staging simulation
-- 6-DOF trajectory optimization
-- Launch window analysis
-- Atmospheric modeling and drag estimation
-- Thermal reentry models
-- Modular GNC framework
-- Interplanetary transfer planning
-- Extensible for custom vehicle models
+## Features (Phase 1 Delivered)
+- Two-body orbital propagation with Keplerian elements
+- US Standard Atmosphere 1976 density & Mach model
+- Tsiolkovsky propulsion + time-dependent thrust/mass
+- 3-DOF ballistic reentry with Sutton-Graves heating
+- Modular high-order SimulationEngine (DOP853)
+- Typed Pydantic vehicle/mission configs
+- Production CLI (`blackvector-sim reentry|orbit`)
+- Unit tests with energy conservation checks
+- Full enterprise structure, CI, and documentation
 
 ## Tech Stack
 - **Core**: Python 3.11+ with NumPy, SciPy, Pandas
@@ -29,17 +30,38 @@ A research and engineering toolkit that bridges computational physics, systems e
 ## Quick Start
 
 ```bash
-pip install -e .
+git clone https://github.com/vxssroot/X-17-BlackVector.git
+cd X-17-BlackVector
+pip install -e ".[dev]"
+blackvector-sim --help
+blackvector-sim reentry --alt 120000 --vel 7800 --gamma -0.4
 ```
 
-See `docs/` for architecture and mathematical models.
+Run tests:
+```bash
+pytest
+```
 
-## Project Structure
+See `docs/` for architecture, derivations, and roadmap.
 
-- `src/blackvector/` - Core library
-- `simulations/` - End-to-end mission sims
-- `tests/` - Comprehensive test suite
-- `docs/` - Research documentation
+## Project Structure (Implemented)
+
+```
+src/blackvector/
+├── core/
+│   ├── constants.py
+│   ├── physics/          # orbital, atmosphere, propulsion, reentry
+│   └── simulation/       # engine
+├── models/               # pydantic VehicleConfig, MissionConfig
+├── cli.py
+docs/
+├── architecture.md
+├── roadmap.md
+└── derivations/
+simulations/examples/
+tests/unit/
+.github/workflows/ci.yml
+```
 
 ## Contributing
 Professional contributions welcome. Follow enterprise-grade standards.
